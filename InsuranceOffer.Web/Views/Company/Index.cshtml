@@ -1,0 +1,45 @@
+﻿@model IEnumerable<InsuranceOffer.Web.Models.ViewModels.CompanyViewModel>
+
+@{
+    ViewBag.Title = "Firmalar";
+}
+
+
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h5>Firmalar</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <img class="img-responsive" src="~/Content/Image/@item.Logo">
+                            </div>
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>@item.Name</strong></h4>
+                            </div>
+                            
+                        </div>
+                        <hr>
+                    }
+
+
+                    <hr>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>

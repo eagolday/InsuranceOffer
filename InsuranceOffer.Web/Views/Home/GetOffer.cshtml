@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Sigorta Teklifi Al";
+}
+
+@model InsuranceOffer.Web.Models.ViewModels.CustomerViewModel
+
+<br />
+
+
+@using (Html.BeginForm("GetOffer", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.UniqueIdentifierNumber, new { @class = "col-md-2  control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.UniqueIdentifierNumber, new { @class = "form-control txtUniqueIdentifierNumber", placeholder = "TC Giriniz" })
+            <br />
+            @Html.ValidationMessageFor(m => m.UniqueIdentifierNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PlateNumber, new { @class = "col-md-2  control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.PlateNumber, new { @class = "form-control txtPlateNumber", placeholder = "Plaka Giriniz" })
+            <br />
+            @Html.ValidationMessageFor(m => m.PlateNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SerialCode, new { @class = "col-md-2  control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.SerialCode, new { @class = "form-control txtSerialCode", placeholder = "Seri Kodu Giriniz" })
+            <br />
+            @Html.ValidationMessageFor(m => m.SerialCode)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SerialNumber, new { @class = "col-md-2  control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.SerialNumber, new { @class = "form-control txtSerialNumber", placeholder = "Seri No Giriniz" })
+            <br />
+            @Html.ValidationMessageFor(m => m.SerialNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-info" value="Teklif Al" />
+        </div>
+    </div>
+}
+
+@section scripts {
+
+    <script>
+        $(function () {
+
+            $('.txtPlateNumber').blur(function () {
+                var uniqueIdentifier = $('.txtUniqueIdentifierNumber').val();
+                var plateNumber = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url:"/Home/CheckCustomer",
+                     data: { uniq: uniqueIdentifier,plate:plateNumber},  
+                    success: function (data) {
+                        if (data.success) {
+                            console.log(data)
+                            $('.txtSerialCode').val(data.sc);
+                            $('.txtSerialNumber').val(data.sn);
+                        }
+                    }
+                });
+            });
+
+        });</script>
+
+}
+

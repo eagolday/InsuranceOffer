@@ -1,0 +1,56 @@
+﻿@model IEnumerable<InsuranceOffer.Web.Models.ViewModels.OfferDetailViewModel>
+
+@{
+    ViewBag.Title = "OfferDetails";
+}
+
+<div class="row">
+    <div class="col-xs-8">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h5>Teklifler</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img class="img-responsive" src="~/Content/Image/@item.CompanyModel.Logo">
+                        </div>
+                        <div class="col-xs-4">
+                            <h4 class="product-name"><strong>@item.CompanyModel.Name</strong></h4><h4><small>@item.Description</small></h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="col-xs-4">
+                                <h6><strong>@item.CustomerModel.PlateNumber </strong></h6>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <h6><strong>@item.Price <span class="text-muted"> tl</span></strong></h6>
+                            </div>
+
+                            <div class="col-xs-2">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                }
+
+
+                <hr>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
